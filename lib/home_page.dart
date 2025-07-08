@@ -5,6 +5,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isMobile = MediaQuery.of(context).size.width < 600;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -88,38 +89,72 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 26),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomWidget(
-                        title: 'Fazer Pedido',
-                        icon: Icons.shopping_cart,
-                        onTap: () => _showDialog(
-                          context,
-                          'Pedido realizado com sucesso!',
+                  if (!isMobile)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomWidget(
+                          title: 'Fazer Pedido',
+                          icon: Icons.shopping_cart,
+                          onTap: () => _showDialog(
+                            context,
+                            'Pedido realizado com sucesso!',
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 26),
-                      CustomWidget(
-                        title: 'Entrar em contato',
-                        icon: Icons.call,
-                        onTap: () => _showDialog(
-                          context,
-                          'Entre em contato pelo nosso whatsapp \n (67) 1234-5678',
+                        const SizedBox(width: 26),
+                        CustomWidget(
+                          title: 'Entrar em contato',
+                          icon: Icons.call,
+                          onTap: () => _showDialog(
+                            context,
+                            'Entre em contato pelo nosso whatsapp \n (67) 1234-5678',
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 26),
+                        const SizedBox(width: 26),
 
-                      CustomWidget(
-                        title: 'Localização',
-                        icon: Icons.location_city,
-                        onTap: () => _showDialog(
-                          context,
-                          'Av. Rosário Congro \n Nº 465, Centro',
+                        CustomWidget(
+                          title: 'Localização',
+                          icon: Icons.location_city,
+                          onTap: () => _showDialog(
+                            context,
+                            'Av. Rosário Congro \n Nº 465, Centro',
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                  if (isMobile)
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomWidget(
+                          title: 'Fazer Pedido',
+                          icon: Icons.shopping_cart,
+                          onTap: () => _showDialog(
+                            context,
+                            'Pedido realizado com sucesso!',
+                          ),
+                        ),
+                        const SizedBox(height: 26),
+                        CustomWidget(
+                          title: 'Entrar em contato',
+                          icon: Icons.call,
+                          onTap: () => _showDialog(
+                            context,
+                            'Entre em contato pelo nosso whatsapp \n (67) 1234-5678',
+                          ),
+                        ),
+                        const SizedBox(height: 26),
+
+                        CustomWidget(
+                          title: 'Localização',
+                          icon: Icons.location_city,
+                          onTap: () => _showDialog(
+                            context,
+                            'Av. Rosário Congro \n Nº 465, Centro',
+                          ),
+                        ),
+                      ],
+                    ),
                 ],
               ),
             ),
@@ -143,9 +178,11 @@ class CustomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final contWidth = MediaQuery.of(context).size.width * .4;
+    final contHeight = MediaQuery.of(context).size.width * .5;
     return Container(
-      height: 300,
-      width: 200,
+      height: 200,
+      width: 250,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         border: Border.all(color: Colors.brown),
